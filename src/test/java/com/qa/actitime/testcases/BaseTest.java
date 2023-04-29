@@ -11,10 +11,14 @@ import com.qa.actitime.pages.Loginpage;
 public class BaseTest extends DriverManager{
 	
 	Loginpage lp;
+	ExtentHtmlReporter extent;
+	ExtentReports report;
 	
 public void setUpReport() {
-	ExtentHtmlReporter extent = new ExtentHtmlReporter("./com.qa.actitime/reports/actiindex.html");
-	ExtentReports report = new ExtentReports();
+	
+	new ExtentHtmlReporter("./com.qa.actitime/reports/actiindex.html");
+	 new ExtentReports();
+	report.attachReporter(extent);
 }
 	
 	@BeforeMethod
@@ -27,7 +31,8 @@ public void setUpReport() {
 	@AfterMethod
 	
 	public void tearDown() {
-		
+	
+	report.flush();
 	quitbrowser();
 	}
 	
